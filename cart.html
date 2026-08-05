@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Review your Urban Threads shopping cart and order total."
+  >
+
+  <title>Cart | Urban Threads</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a href="./index.html" class="logo">
+        URBAN<span>THREADS</span>
+      </a>
+
+      <button
+        class="mobile-menu-button"
+        id="mobile-menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./wishlist.html">Wishlist</a>
+
+        <a href="./cart.html" class="cart-link active">
+          Cart
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+
+        <span class="user-email" id="user-email"></span>
+
+        <a
+          href="./login.html"
+          class="login-link"
+          id="login-link"
+        >
+          Login
+        </a>
+
+        <button
+          class="logout-button hidden"
+          id="logout-button"
+          type="button"
+        >
+          Logout
+        </button>
+
+        <button
+          class="theme-button"
+          id="theme-button"
+          type="button"
+          aria-label="Switch colour theme"
+        >
+          ☾
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="cart-page">
+    <section class="cart-header container">
+      <p class="eyebrow">Your selection</p>
+      <h1>Shopping cart</h1>
+
+      <p>
+        Review your products, adjust quantities and view your
+        order total.
+      </p>
+    </section>
+
+    <section class="cart-section container">
+      <div
+        class="cart-status"
+        id="cart-status"
+        role="status"
+        aria-live="polite"
+      >
+        Checking your account...
+      </div>
+
+      <div class="cart-layout hidden" id="cart-content">
+        <section
+          class="cart-items-section"
+          aria-labelledby="cart-items-heading"
+        >
+          <div class="cart-section-heading">
+            <div>
+              <p class="eyebrow">Your items</p>
+              <h2 id="cart-items-heading">Cart items</h2>
+            </div>
+
+            <p id="cart-item-count">0 items</p>
+          </div>
+
+          <div id="cart-items" class="cart-items"></div>
+
+          <div id="empty-cart" class="empty-cart hidden">
+            <span class="empty-cart-icon">🛍</span>
+            <h2>Your cart is empty</h2>
+
+            <p>
+              Browse the latest Urban Threads collection and add
+              something to your fit.
+            </p>
+
+            <a href="./shop.html" class="primary-link">
+              Start shopping
+            </a>
+          </div>
+        </section>
+
+        <aside
+          class="order-summary"
+          aria-labelledby="order-summary-heading"
+        >
+          <p class="eyebrow">Order details</p>
+          <h2 id="order-summary-heading">Summary</h2>
+
+          <div class="summary-lines">
+            <div class="summary-line">
+              <span>Subtotal</span>
+              <strong id="cart-subtotal">R0.00</strong>
+            </div>
+
+            <div class="summary-line">
+              <span>Delivery</span>
+              <strong>Free</strong>
+            </div>
+
+            <div class="summary-line summary-total">
+              <span>Total</span>
+              <strong id="cart-total">R0.00</strong>
+            </div>
+          </div>
+
+          <button
+            class="checkout-button"
+            id="checkout-button"
+            type="button"
+            disabled
+          >
+            Proceed to checkout
+          </button>
+
+          <button
+            class="clear-cart-button"
+            id="clear-cart-button"
+            type="button"
+            disabled
+          >
+            Clear cart
+          </button>
+
+          <a href="./shop.html" class="continue-shopping-link">
+            ← Continue shopping
+          </a>
+
+          <div class="secure-checkout-note">
+            <span>🔒</span>
+
+            <p>
+              Your cart is stored securely under your Firebase
+              account.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div
+    class="toast hidden"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <div
+    class="checkout-modal hidden"
+    id="checkout-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="checkout-modal-heading"
+  >
+    <div class="checkout-modal-backdrop"></div>
+
+    <section class="checkout-modal-content">
+      <button
+        class="modal-close-button"
+        id="modal-close-button"
+        type="button"
+        aria-label="Close checkout confirmation"
+      >
+        ✕
+      </button>
+
+      <span class="checkout-success-icon">✓</span>
+
+      <h2 id="checkout-modal-heading">Order confirmed</h2>
+
+      <p>
+        Thank you for shopping with Urban Threads. This checkout
+        is a demonstration for the student project.
+      </p>
+
+      <button
+        class="primary-button"
+        id="finish-checkout-button"
+        type="button"
+      >
+        Continue shopping
+      </button>
+    </section>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <a href="./index.html" class="logo footer-logo">
+          URBAN<span>THREADS</span>
+        </a>
+
+        <p>Streetwear made for your everyday story.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="./shop.html">Shop</a>
+        <a href="./login.html">Account</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+
+      <p class="copyright">
+        &copy; 2026 Urban Threads. Student project.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/cart.js"></script>
+  <script type="module" src="./js/navbar.js"></script>
+  <script type="module" src="./js/theme.js"></script>
+</body>
+</html>

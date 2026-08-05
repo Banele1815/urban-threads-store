@@ -1,8 +1,12 @@
-import { db } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 
 import {
   collection,
-  getDocs
+  doc,
+  getDoc,
+  getDocs,
+  serverTimestamp,
+  setDoc
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore.js";
 
 const productGrid = document.querySelector("#product-grid");
@@ -13,6 +17,17 @@ const categoryFilter = document.querySelector("#category-filter");
 const sortSelect = document.querySelector("#sort-select");
 
 let allProducts = [];
+
+const toast = document.createElement("div");
+
+toast.id = "toast";
+toast.className = "toast hidden";
+toast.setAttribute("role", "status");
+toast.setAttribute("aria-live", "polite");
+
+document.body.append(toast);
+
+let toastTimer = null;
 
 const currencyFormatter = new Intl.NumberFormat("en-ZA", {
   style: "currency",
@@ -222,5 +237,102 @@ productGrid.addEventListener(
 searchInput.addEventListener("input", filterAndSortProducts);
 categoryFilter.addEventListener("change", filterAndSortProducts);
 sortSelect.addEventListener("change", filterAndSortProducts);
+
+function showToast(message, type = "success") {
+  window.clearTimeout(toastTimer);
+
+  toast.textContent = message;
+  toast.className = `toast ${type}`;
+
+  toastTimer = window.setTimeout(() => {
+    toast.classList.add("hidden");
+  }, 3000);
+}
+
+async function addProductToCart(productId, button) {
+  const user = auth.currentUser;
+
+  if (!user) {
+    window.location.href = "./login.html?redirect=shop";
+    return;
+  }
+
+  const product = allProducts.find(
+    (item) => item.id === productId
+  );
+
+  if (!product) {
+    showToast("This product could not be found.", "error");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Adding...";
+
+  try {
+    const cartItemReference = doc(
+      db,
+      "users",
+      user.uid,
+      "cart",
+      productId
+    );
+
+    const cartItemSnapshot =
+      await getDoc(cartItemReference);
+
+    const currentQuantity =
+      cartItemSnapshot.exists()
+        ? Number(cartItemSnapshot.data().quantity) || 0
+        : 0;
+
+    const maximumQuantity = Math.min(
+      10,
+      Number(product.stock)
+    );
+
+    if (currentQuantity >= maximumQuantity) {
+      showToast(
+        `You can only add ${maximumQuantity} of this product.`,
+        "error"
+      );
+
+      return;
+    }
+
+    await setDoc(cartItemReference, {
+      productId,
+      quantity: currentQuantity + 1,
+      updatedAt: serverTimestamp()
+    });
+
+    showToast(`${product.name} added to your cart.`);
+  } catch (error) {
+    console.error("Could not add product to cart:", error);
+
+    showToast(
+      "The product could not be added. Please try again.",
+      "error"
+    );
+  } finally {
+    button.disabled = false;
+    button.textContent = "Add to cart";
+  }
+}
+
+productGrid.addEventListener("click", async (event) => {
+  const button = event.target.closest(
+    '[data-action="cart"]'
+  );
+
+  if (!button) {
+    return;
+  }
+
+  await addProductToCart(
+    button.dataset.productId,
+    button
+  );
+});
 
 loadProducts();
