@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Log in or create an Urban Threads customer account."
+  >
+
+  <title>Account | Urban Threads</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a href="./index.html" class="logo">
+        URBAN<span>THREADS</span>
+      </a>
+
+      <button
+        class="mobile-menu-button"
+        id="mobile-menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="./index.html">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./wishlist.html">Wishlist</a>
+
+        <a href="./cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+
+        <span class="user-email" id="user-email"></span>
+
+        <a
+          href="./login.html"
+          class="login-link active"
+          id="login-link"
+        >
+          Login
+        </a>
+
+        <button
+          class="logout-button hidden"
+          id="logout-button"
+          type="button"
+        >
+          Logout
+        </button>
+
+        <button
+          class="theme-button"
+          id="theme-button"
+          type="button"
+          aria-label="Switch colour theme"
+        >
+          ☾
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="auth-page">
+    <section class="auth-layout container">
+      <div class="auth-introduction">
+        <p class="eyebrow">Urban Threads membership</p>
+
+        <h1>Your style, saved.</h1>
+
+        <p class="auth-description">
+          Create an account to save your wishlist, manage your
+          shopping cart and continue shopping across sessions.
+        </p>
+
+        <ul class="auth-benefits">
+          <li>
+            <span>01</span>
+            A private cart saved securely in Firebase
+          </li>
+
+          <li>
+            <span>02</span>
+            Save favourite products to your wishlist
+          </li>
+
+          <li>
+            <span>03</span>
+            Access your account on different devices
+          </li>
+        </ul>
+      </div>
+
+      <section class="auth-card" aria-labelledby="auth-heading">
+        <div class="auth-tabs" role="tablist">
+          <button
+            class="auth-tab active"
+            id="login-tab"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            aria-controls="login-form"
+          >
+            Log in
+          </button>
+
+          <button
+            class="auth-tab"
+            id="signup-tab"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            aria-controls="signup-form"
+          >
+            Sign up
+          </button>
+        </div>
+
+        <div
+          class="auth-message hidden"
+          id="auth-message"
+          role="status"
+          aria-live="polite"
+        ></div>
+
+        <form id="login-form" class="auth-form" novalidate>
+          <div class="form-heading">
+            <p class="eyebrow">Welcome back</p>
+            <h2 id="auth-heading">Log in to your account</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="login-email">Email address</label>
+
+            <input
+              type="email"
+              id="login-email"
+              name="email"
+              placeholder="name@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Password</label>
+
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <button class="auth-submit-button" type="submit">
+            Log in
+          </button>
+
+          <button
+            class="forgot-password-button"
+            id="forgot-password-button"
+            type="button"
+          >
+            Forgot your password?
+          </button>
+        </form>
+
+        <form
+          id="signup-form"
+          class="auth-form hidden"
+          novalidate
+        >
+          <div class="form-heading">
+            <p class="eyebrow">Join the community</p>
+            <h2>Create your account</h2>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-name">Full name</label>
+
+            <input
+              type="text"
+              id="signup-name"
+              name="name"
+              placeholder="Your full name"
+              autocomplete="name"
+              maxlength="50"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="signup-email">Email address</label>
+
+            <input
+              type="email"
+              id="signup-email"
+              name="email"
+              placeholder="name@example.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+
+            <input
+              type="password"
+              id="signup-password"
+              name="password"
+              placeholder="Create a secure password"
+              autocomplete="new-password"
+              required
+            >
+
+            <p class="field-help">
+              Use at least 8 characters with an uppercase
+              letter, lowercase letter and number.
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="confirm-password">
+              Confirm password
+            </label>
+
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirmPassword"
+              placeholder="Enter the password again"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <label class="terms-checkbox">
+            <input
+              type="checkbox"
+              id="terms-checkbox"
+              required
+            >
+
+            <span>
+              I agree to the Urban Threads student-project
+              terms and privacy notice.
+            </span>
+          </label>
+
+          <button class="auth-submit-button" type="submit">
+            Create account
+          </button>
+        </form>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <a href="./index.html" class="logo footer-logo">
+          URBAN<span>THREADS</span>
+        </a>
+
+        <p>Streetwear made for your everyday story.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="./shop.html">Shop</a>
+        <a href="./login.html">Account</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+
+      <p class="copyright">
+        &copy; 2026 Urban Threads. Student project.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/auth.js"></script>
+  <script type="module" src="./js/navbar.js"></script>
+  <script type="module" src="./js/theme.js"></script>
+</body>
+</html>
