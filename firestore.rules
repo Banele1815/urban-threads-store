@@ -1,0 +1,57 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    // Anyone may view products, but customers cannot modify them.
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Each user may only access their own profile.
+    match /users/{userId} {
+      allow read, delete: if isOwner(userId);
+
+      allow create, update: if isOwner(userId)
+        && request.resource.data.keys()
+          .hasOnly(['email', 'displayName', 'createdAt'])
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.displayName is string
+        && request.resource.data.createdAt is timestamp;
+
+      // Each user may only access their own cart.
+      match /cart/{productId} {
+        allow read, delete: if isOwner(userId);
+
+        allow create, update: if isOwner(userId)
+          && request.resource.data.keys()
+            .hasOnly(['productId', 'quantity', 'updatedAt'])
+          && request.resource.data.productId == productId
+          && request.resource.data.quantity is int
+          && request.resource.data.quantity >= 1
+          && request.resource.data.quantity <= 10
+          && request.resource.data.updatedAt is timestamp;
+      }
+
+      // Each user may only access their own wishlist.
+      match /wishlist/{productId} {
+        allow read, delete: if isOwner(userId);
+
+        allow create, update: if isOwner(userId)
+          && request.resource.data.keys()
+            .hasOnly(['productId', 'createdAt'])
+          && request.resource.data.productId == productId
+          && request.resource.data.createdAt is timestamp;
+      }
+    }
+  }
+}
