@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Urban Threads is a modern online streetwear store offering hoodies, T-shirts, sneakers and accessories."
+  >
+
+  <title>Urban Threads | Own the Street</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+      <a href="./index.html" class="logo">
+        URBAN<span>THREADS</span>
+      </a>
+
+      <button
+        class="mobile-menu-button"
+        id="mobile-menu-button"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="./index.html" class="active">Home</a>
+        <a href="./shop.html">Shop</a>
+        <a href="./wishlist.html">Wishlist</a>
+
+        <a href="./cart.html" class="cart-link">
+          Cart
+          <span class="cart-count" id="cart-count">0</span>
+        </a>
+
+        <span class="user-email" id="user-email"></span>
+
+        <a
+          href="./login.html"
+          class="login-link"
+          id="login-link"
+        >
+          Login
+        </a>
+
+        <button
+          class="logout-button hidden"
+          id="logout-button"
+          type="button"
+        >
+          Logout
+        </button>
+
+        <button
+          class="theme-button"
+          id="theme-button"
+          type="button"
+          aria-label="Switch colour theme"
+        >
+          ☾
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="home-hero">
+      <div class="home-hero-layout container">
+        <div class="home-hero-content">
+          <p class="eyebrow">New season · 2026 collection</p>
+
+          <h1>
+            Own the street.
+            <span>Wear your story.</span>
+          </h1>
+
+          <p class="home-hero-description">
+            Everyday streetwear designed for comfort, confidence
+            and individuality. Find the pieces that move with you.
+          </p>
+
+          <div class="home-hero-actions">
+            <a href="./shop.html" class="hero-primary-button">
+              Shop the collection
+            </a>
+
+            <a href="#featured-products" class="hero-secondary-button">
+              View featured products
+            </a>
+          </div>
+
+          <div class="home-statistics">
+            <div>
+              <strong>12+</strong>
+              <span>Curated products</span>
+            </div>
+
+            <div>
+              <strong>4</strong>
+              <span>Streetwear categories</span>
+            </div>
+
+            <div>
+              <strong>100%</strong>
+              <span>Urban attitude</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-hero-visual">
+          <div class="hero-image-frame">
+            <img
+              id="hero-image"
+              src="./images/hero-streetwear.jpg"
+              alt="Urban Threads streetwear collection"
+            >
+          </div>
+
+          <div class="hero-floating-card hero-floating-card-top">
+            <span>New drop</span>
+            <strong>Fresh fits weekly</strong>
+          </div>
+
+          <div class="hero-floating-card hero-floating-card-bottom">
+            <span>Free delivery</span>
+            <strong>On every demo order</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Shop your style</p>
+          <h2>Explore categories</h2>
+        </div>
+
+        <a href="./shop.html">View everything →</a>
+      </div>
+
+      <div class="category-grid">
+        <a
+          href="./shop.html?category=Hoodies"
+          class="category-card category-hoodies"
+        >
+          <span class="category-number">01</span>
+          <div>
+            <h3>Hoodies</h3>
+            <p>Relaxed comfort for every season.</p>
+          </div>
+          <span class="category-arrow">↗</span>
+        </a>
+
+        <a
+          href="./shop.html?category=T-shirts"
+          class="category-card category-tshirts"
+        >
+          <span class="category-number">02</span>
+          <div>
+            <h3>T-shirts</h3>
+            <p>Essential shapes and bold graphics.</p>
+          </div>
+          <span class="category-arrow">↗</span>
+        </a>
+
+        <a
+          href="./shop.html?category=Sneakers"
+          class="category-card category-sneakers"
+        >
+          <span class="category-number">03</span>
+          <div>
+            <h3>Sneakers</h3>
+            <p>Everyday movement meets street style.</p>
+          </div>
+          <span class="category-arrow">↗</span>
+        </a>
+
+        <a
+          href="./shop.html?category=Accessories"
+          class="category-card category-accessories"
+        >
+          <span class="category-number">04</span>
+          <div>
+            <h3>Accessories</h3>
+            <p>The finishing details for your fit.</p>
+          </div>
+          <span class="category-arrow">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <section
+      class="featured-section"
+      id="featured-products"
+    >
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Selected for you</p>
+            <h2>Featured products</h2>
+          </div>
+
+          <a href="./shop.html">Shop all products →</a>
+        </div>
+
+        <div
+          class="featured-status"
+          id="featured-status"
+          role="status"
+          aria-live="polite"
+        >
+          Loading featured products...
+        </div>
+
+        <section
+          class="product-grid"
+          id="featured-product-grid"
+          aria-label="Featured products"
+        ></section>
+      </div>
+    </section>
+
+    <section class="brand-section container">
+      <div class="brand-visual" aria-hidden="true">
+        <span>URBAN</span>
+        <strong>THREADS</strong>
+        <p>EST. 2026</p>
+      </div>
+
+      <div class="brand-content">
+        <p class="eyebrow">More than clothing</p>
+
+        <h2>Streetwear made for your everyday story.</h2>
+
+        <p>
+          Urban Threads celebrates the confidence and creativity
+          found in everyday city life. Our fictional collection
+          brings together relaxed silhouettes, versatile basics
+          and statement pieces for young adults.
+        </p>
+
+        <a href="./shop.html" class="primary-link">
+          Discover the collection
+        </a>
+      </div>
+    </section>
+
+    <section class="store-benefits">
+      <div class="benefits-grid container">
+        <article>
+          <span>01</span>
+          <h3>Firebase powered</h3>
+          <p>
+            Products, accounts, carts and wishlists are managed
+            using Firebase services.
+          </p>
+        </article>
+
+        <article>
+          <span>02</span>
+          <h3>Secure accounts</h3>
+          <p>
+            Authentication and Firestore rules keep each
+            customer’s information private.
+          </p>
+        </article>
+
+        <article>
+          <span>03</span>
+          <h3>Shop anywhere</h3>
+          <p>
+            Responsive layouts provide a smooth experience on
+            mobile, tablet and desktop.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="newsletter-section container">
+      <div class="newsletter-content">
+        <div>
+          <p class="eyebrow">Stay in the loop</p>
+          <h2>Get updates on the latest drops.</h2>
+        </div>
+
+        <form id="newsletter-form" class="newsletter-form">
+          <label class="visually-hidden" for="newsletter-email">
+            Email address
+          </label>
+
+          <input
+            type="email"
+            id="newsletter-email"
+            placeholder="Enter your email address"
+            required
+          >
+
+          <button type="submit">Join the list</button>
+        </form>
+
+        <p
+          class="newsletter-message hidden"
+          id="newsletter-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </div>
+    </section>
+  </main>
+
+  <div
+    class="toast hidden"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div>
+        <a href="./index.html" class="logo footer-logo">
+          URBAN<span>THREADS</span>
+        </a>
+
+        <p>Streetwear made for your everyday story.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="./shop.html">Shop</a>
+        <a href="./login.html">Account</a>
+        <a href="./cart.html">Cart</a>
+      </div>
+
+      <p class="copyright">
+        &copy; 2026 Urban Threads. Student project.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="./js/home.js"></script>
+  <script type="module" src="./js/navbar.js"></script>
+  <script type="module" src="./js/theme.js"></script>
+</body>
+</html>
