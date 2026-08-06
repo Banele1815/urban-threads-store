@@ -553,4 +553,22 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+const categoryFromURL = new URLSearchParams(
+  window.location.search
+).get("category");
+
+if (categoryFromURL) {
+  const matchingOption = Array.from(
+    categoryFilter.options
+  ).find(
+    (option) =>
+      option.value.toLowerCase() ===
+      categoryFromURL.toLowerCase()
+  );
+
+  if (matchingOption) {
+    categoryFilter.value = matchingOption.value;
+  }
+}
+
 loadProducts();
