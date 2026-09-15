@@ -53,5 +53,14 @@ service cloud.firestore {
           && request.resource.data.createdAt is timestamp;
       }
     }
+
+    // Orders are created and updated only by the payfast-initiate and
+    // payfast-notify serverless functions via the Admin SDK, which
+    // bypasses these rules entirely. Customers may only read their
+    // own orders, never write them directly.
+    match /orders/{orderId} {
+      allow read: if isOwner(resource.data.userId);
+      allow write: if false;
+    }
   }
 }
