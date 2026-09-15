@@ -422,24 +422,54 @@ clearCartButton.addEventListener("click", async () => {
   }
 });
 
+function submitPayfastForm(action, fields) {
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = action;
+
+  Object.entries(fields).forEach(([key, value]) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = key;
+    input.value = value;
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+}
+
 checkoutButton.addEventListener("click", async () => {
+  if (!currentUser) {
+    return;
+  }
+
   checkoutButton.disabled = true;
 
   try {
-    const orderWasCompleted = await clearCart(false);
+    const idToken = await currentUser.getIdToken();
 
-    if (!orderWasCompleted) {
-      checkoutButton.disabled = false;
-      return;
+    const response = await fetch("/api/payfast-initiate", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${idToken}`
+      }
+    });
+
+    const payload = await response.json();
+
+    if (!response.ok) {
+      throw new Error(payload.error || "Checkout could not be started.");
     }
 
-    checkoutModal.classList.remove("hidden");
-    modalCloseButton.focus();
+    // Redirects the browser to PayFast's sandbox — the order stays
+    // "pending" until the notify webhook confirms payment.
+    submitPayfastForm(payload.action, payload.fields);
   } catch (error) {
     console.error("Checkout failed:", error);
 
     showToast(
-      "Checkout could not be completed. Please try again.",
+      "Checkout could not be started. Please try again.",
       "error"
     );
 
